@@ -30,16 +30,15 @@ define(['exports', 'aurelia-pal'], function (exports, _aureliaPal) {
   };
 
   if (typeof FEATURE_NO_IE === 'undefined') {
-    var test = function test() {};
+    if ('name' in Function.prototype === false) {
 
-    if (test.name === undefined) {
       Object.defineProperty(Function.prototype, 'name', {
-        get: function get() {
-          var name = this.toString().match(/^\s*function\s*(\S*)\s*\(/)[1];
 
-          Object.defineProperty(this, 'name', { value: name });
-          return name;
+        get: function get() {
+
+          return this.toString().match(/^\s*function\s*([^\(\s]*)/)[1];
         }
+
       });
     }
   }

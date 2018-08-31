@@ -16,16 +16,15 @@ export const _PLATFORM = {
 };
 
 if (typeof FEATURE_NO_IE === 'undefined') {
-  function test() {}
+  if ('name' in Function.prototype === false) {
 
-  if (test.name === undefined) {
     Object.defineProperty(Function.prototype, 'name', {
-      get: function () {
-        let name = this.toString().match(/^\s*function\s*(\S*)\s*\(/)[1];
 
-        Object.defineProperty(this, 'name', { value: name });
-        return name;
+      get: function () {
+
+        return this.toString().match(/^\s*function\s*([^\(\s]*)/)[1];
       }
+
     });
   }
 }

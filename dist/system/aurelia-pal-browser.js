@@ -3,7 +3,7 @@
 System.register(['aurelia-pal'], function (_export, _context) {
   "use strict";
 
-  var initializePAL, isInitialized, _typeof, _PLATFORM, test, protoProp, strTrim, arrIndexOf, emptyArray, DOMEx, checkTokenAndGetIndex, ClassList, classListProto, testElement, createMethod, _toggle, _filterEntries, _clearEntries, nowOffset, startOffset, _entries, _marksIndex, con, nop, _CustomEvent, proto, _FEATURE, isSVGTemplate, fixSVGTemplateElement, fixHTMLTemplateElement, fixHTMLTemplateElementRoot, shadowPoly, _DOM;
+  var initializePAL, isInitialized, _typeof, _PLATFORM, protoProp, strTrim, arrIndexOf, emptyArray, DOMEx, checkTokenAndGetIndex, ClassList, classListProto, testElement, createMethod, _toggle, _filterEntries, _clearEntries, nowOffset, startOffset, _entries, _marksIndex, con, nop, _CustomEvent, proto, _FEATURE, isSVGTemplate, fixSVGTemplateElement, fixHTMLTemplateElement, fixHTMLTemplateElementRoot, shadowPoly, _DOM;
 
   function initialize() {
     if (isInitialized) {
@@ -71,16 +71,15 @@ System.register(['aurelia-pal'], function (_export, _context) {
       _export('_PLATFORM', _PLATFORM);
 
       if (typeof FEATURE_NO_IE === 'undefined') {
-        test = function test() {};
+        if ('name' in Function.prototype === false) {
 
-        if (test.name === undefined) {
           Object.defineProperty(Function.prototype, 'name', {
-            get: function get() {
-              var name = this.toString().match(/^\s*function\s*(\S*)\s*\(/)[1];
 
-              Object.defineProperty(this, 'name', { value: name });
-              return name;
+            get: function get() {
+
+              return this.toString().match(/^\s*function\s*([^\(\s]*)/)[1];
             }
+
           });
         }
       }
